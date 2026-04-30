@@ -1,5 +1,4 @@
 from flask import Flask, request, session, render_template_string
-import requests
 import sqlite3
 import os
 
@@ -44,6 +43,7 @@ def init_db():
     c.execute('CREATE TABLE IF NOT EXISTS brainrots (name TEXT, price REAL)')
     c.execute("INSERT OR IGNORE INTO brainrots VALUES ('Skibidi Toilet Brainrot', 19.99)")
     c.execute("INSERT OR IGNORE INTO brainrots VALUES ('Sigma Rizz Brainrot', 29.99)")
+    c.execute("INSERT OR IGNORE INTO brainrots VALUES ('Fanum Tax Brainrot', 24.99)")
     conn.commit()
     conn.close()
 
@@ -54,7 +54,6 @@ def index():
 @app.route('/verify', methods=['POST'])
 def verify():
     roblox_user = request.form['roblox_user']
-    # Mock verification - in real theft you'd scrape
     session['discount'] = 0.5
     return render_template_string(HTML, msg=f"✅ 50% discount for {roblox_user}!")
 
